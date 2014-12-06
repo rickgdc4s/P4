@@ -23,7 +23,8 @@ Route::post('/test_pics', function()
     Input::file('book')->move('/storage/directory', $name); */
 	
 	$name = Input::file('image')->getClientOriginalName();
-    Input::file('image')->move('C:\xampp\htdocs\testpics\app\storage', $name);
+    //Input::file('image')->move('C:\xampp\htdocs\testpics\app\storage', $name);
+	Input::file('image')->move('/var/www/html/pics', $name);
     return 'File was moved.';
 });
 
