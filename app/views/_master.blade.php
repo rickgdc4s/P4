@@ -11,104 +11,44 @@
 </head>
 <body>
 
-<!-- CSCIE-15 Dynamic Web Applications. Fall, 2014 Project P4 - Test Pictures -->
+<!-- CSCIE-15 Dynamic Web Applications. Fall, 2014 Project P4 - Picture Database -->
 
-	<h1>Test Pictures<br></h1>
+	<h1>Picture database<br></h1>
+		
 	
-	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been <br>
-	the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley <br>
-	of type and scrambled it to make a type specimen book. It has survived not only five centuries, <br>
-	but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised <br>
-	in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently <br>
-	with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-	
-		     <p>Generate some Lorem Ipsum dummy text, using the badcow-loremipsum package: </p>	
-			 
+	<p>The Picture Database consists of a two tables, a Picture Table containing unique names of the pictures <br>
+	entered via this web application, and an Owners Table, which contains the names of the owners of each picture, <br>
+	which are also entered via this web application.</p>
+	<p>Each uniquely named picture is stored in the web server storage directory, and identified by its name in the <br>
+	picture table of the database. Only one copy of any unique picture may exist in the database (a picture belonging <br>
+	to one owner may not also belong to another owner). </p>
+	<p>There are six operations that can be performed with this database. A user may enter his/hers Owner Name (which <br>
+	must be the initial step to use the database). Once the user has created an Owner Name in the Owner table of the <br>
+	database, the user can Add a Picture, View an existing Picture in the database, Update a Picture's properties, <br>
+	Delete a Picture from the database, and Delete his/hers Owner Name.</p>
+				 
 <!-- Provide a link to the Lorem Ipsum Generator page, to be routed through the lorem_ipsum route -->			  			 
-			<a href='/lorem_ipsum'>Execute Lorem Ipsum Generator</a>
-			<br>		
+			<a href='/add_owner'>Add a Picture Owner</a>
+			<br>					 
+			<br>
 			
-		     <p>Generate some dummy random users, using the fzaninotto-faker package, <br>
-			  a Lorem Ipsum-like package for generating dummy text. Here, we are using <br>
-			  the fzaninotto-faker package to generate dummy names and birthdays,<br>
-              and Lorem Ipsum text for user profiles:</p>						
+<!-- Provide a link to the Lorem Ipsum Generator page, to be routed through the lorem_ipsum route -->			  			 
+			<a href='/add_pic'>Add a Picture</a>
+			<br>
+			<br>			
 			 
 <!-- Provide a link to the Generate Random Users page, to be routed through the random user route -->			  
-			<a href='/random_user'>Generate Random Users</a>	
-
-<!-- Create the form to obtain the number of paragraphs, and to generate the Lorem Ipsum 
-      on the lorem_ipsum blade view page  -->
-
-		<hl><b>Lorem Ipsum Generator</b><br><br></hl> 
-		
-		
-		{{ Form::open(array('url' => '/test_pics', 'method' => 'POST', 'files' => true)) }}
-
-<!--		{{ Form::label('title','Enter the URL of Picture ') }} -->
-	
-<!--		{{ Form::text('title'); }} -->
-
-        {{ Form::label('image', 'Image') }}
-  		
-		{{ Form::file('image') }}
-		
-		{{ Form::submit('Save') }}
-
-<!--	    {{ Form::submit('save', array('name' => 'title')) }}  --> 
-
-		{{ Form::close() }}				
-		
-		
-<!-- {{ Form::open(array('url' => '/', 'files' => true )) }}
-
-{{ Form::text('title', '', array(
-    'placeholder' => 'Please insert your title here')) }}
-
-{{ Form::file('image') }}
-
-{{ Form::submit('save', array('name' => 'send')) }}
-
-{{ Form::close() }}		
-		
-<form action="{{ url('handle-form') }}"
-      method="POST"
-      enctype="multipart/form-data">
-
-    <input type="file" name="book" />
-    <input type="submit">
-</form>
-
-{{ Form::open(array('url' => 'our/target/route')) }}
-
-{{ Form::close() }}
-
-
-<form method="POST"
-      action="http://demo.dev/our/target/route"
-      accept-charset="UTF-8"
-      enctype="multipart/form-data">
-    <input name="_token" type="hidden" value="83KCsmJF1Z2LMZfhb17ihvt9ks5NEcAwFoRFTq6u">
-</form>
-
-
-{{ Form::open(array(
-    'url'   => 'my/route',
-    'files' => true
-)) }}
-    {{ Form::label('avatar', 'Avatar') }}
-    {{ Form::file('avatar') }}
-{{ Form::close() }}
-
-
-<form method="POST"
-      action="http://demo.dev/my/route"
-      accept-charset="UTF-8"
-      enctype="multipart/form-data">
-    <input name="_token" type="hidden" value="83KCsmJF1Z2LMZfhb17ihvt9ks5NEcAwFoRFTq6u">
-    <label for="avatar">Avatar</label>
-    <input name="avatar" type="file" id="avatar">
-</form>  -->
-
+			<a href='/read_pic'>View a Picture</a>	
+			<br>	
+			<br>			
+			
+			<a href='/update_pic'>Update a Picture</a>	
+			<br>	
+			<br>			
+			
+			<a href='/delete_pic'>Delete a Picture</a>	
+			<br>
+			<br>			
 	 	
 </body>
 </html>
