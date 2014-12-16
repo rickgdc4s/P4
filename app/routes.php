@@ -283,6 +283,38 @@ Route::post('/read_pic', function()
 
 });
 
+Route::get('/retrieve_pic', function()
+{
+	// Add a new picture to the Picture table in the Picture Database
+	//   and add the image file to the web server storage directory
+	// Browse to the Picture's Location and Name, enter the owner of 
+	//  the picture, and the date it was taken
+	return View::make('retrieve_pic');
+});	
+
+Route::post('/retrieve_pic', function()
+{
+    // Obtain the entered name of the picture
+	$pic_name = Input::get('query');
+	echo $pic_name."<br>";
+	
+    //$file = 'path_to_my_file.pdf';
+	//$file = public_path(). 'http://localhost/public/assets/$pic_name";
+	//$file = public_path(). 'http://localhost/assets/'.$pic_name;
+	$file = public_path(). "/" .$pic_name;
+    return Response::download($file);
+
+});
+
+////Route::post('/file/download', function()
+////{
+
+	// Update a previously entered picture in the Picture table in the Picture Database	
+	////return 'In route-get update_pic';
+	//return View::make('update_pic');
+	
+////});
+
 Route::get('/update_pic', function()
 {
 

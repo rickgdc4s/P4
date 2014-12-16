@@ -42,6 +42,11 @@
 			<br>	
 			<br>			
 			
+<!-- Provide a link to the Generate Random Users page, to be routed through the random user route -->			  
+			<a href='/retrieve_pic'>Download a Picture</a>	
+			<br>	
+			<br>						
+			
 			<a href='/update_pic'>Update a Picture</a>	
 			<br>	
 			<br>			
