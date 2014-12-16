@@ -114,7 +114,7 @@ Route::post('/add_pic', function()
 	
 	// Create the rules array for the Owner and the date
 	$rules = array(
-	     'pic_owner' => array( 'required', 'Min:1', 'Max:10' ),
+	     'pic_owner' => array( 'required', 'Min:1', 'Max:20' ),
 		 'date' => array( 'required', 'date' )
 		 );	
 	
@@ -234,13 +234,13 @@ Route::post('/read_pic', function()
 	     'query' => Input::get( 'query' ),
 		 ),
 	   array(
-	     'query' => array( 'required', 'Min:1', 'Max:10' )
+	     'query' => array( 'required', 'Min:1', 'Max:20' )
 		 )
 	);
 	
 	//If an error occurs, print an error message on the random user page
 	if ($validation->fails()) {
-	   return Redirect::to('/add_owner')->withErrors($validation->messages());
+	   return Redirect::to('/read_pic')->withErrors($validation->messages());
 	   }	
 	
 	// Initialize the picture owner and date values to null 
@@ -347,7 +347,7 @@ Route::post('/delete_pic', function()
 	     'query' => Input::get( 'query' ),
 		 ),
 	   array(
-	     'query' => array( 'required', 'Min:1', 'Max:10' )
+	     'query' => array( 'required', 'Min:1', 'Max:20' )
 		 )
 	);
 	
