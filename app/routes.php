@@ -394,6 +394,99 @@ Route::post('/delete_pic', function()
 });
 
 
+Route::get('/delete_owner', function()
+{
+	// Delete a previously entered owner from the Owner table in the Picture Database
+	//  Also delete all of the pictures associated with this owner from the Picture table		
+	return View::make('delete_owner');
+});
+
+Route::post('/delete_owner', function()
+{
+    // Obtain the Entered name of the picture
+	$owner_name = Input::get('query');
+	echo $owner_name."<br>";
+	
+		// Create the validation constraint set
+	$rules = array();
+	
+	// Create the Validator instance on the query field
+	//   The number of random users requested must be between 1 and 99
+	$validation = Validator::make(
+	   array(
+	     'query' => Input::get( 'query' ),
+		 ),
+	   array(
+	     'query' => array( 'required', 'Min:1', 'Max:20' )
+		 )
+	);
+	
+	//If an error occurs, print an error message on the random user page
+	if ($validation->fails()) {
+	   return Redirect::to('/delete_owner')->withErrors($validation->messages());
+	   }		
+	
+	// Get the Owner entry in the Owner table in the Picture DB
+    $owner = Owner::where('pic_owner_name', '=', $owner_name)->get();
+	
+	// Get all of the Picture entries in the Picture table in the Picture DB
+	$pic = Pic::all();	
+   
+	echo "Owner = " . $owner . ".<br>";
+
+	// Initialize the boolean to false
+	//  The entered Owner name may not exist in the Owner table of the Picture DB
+    $found_Owner = false;
+	$found_Pic = false;		
+
+	// Check if the Owner entered for deletion exists in the Owner table of the Picture DB
+	//  If it does, delete it from the Owner table of the Picture DB
+	//   and from the storage directory on the web server
+    if ($owner->isEmpty() != TRUE) {
+        echo "In if" ."<br>";
+		
+        foreach ($owner as $owner1) {
+	        echo "Owner = " . $owner1->pic_owner_name . ".<br>";
+			
+	       if ($found_Owner == false) {
+	            if ($owner1->pic_owner_name == $owner_name) {
+			        echo "Owner Found"."<br>";
+					
+			        $found_Owner = true;
+					
+	                // Check if there are any associated Pictures with this Owner
+		            //  If so, delete each associeate Picture from the Picture table of the Picture DB
+                    if ($pic->isEmpty() != TRUE) {
+                        echo "In if" ."<br>";
+                        foreach ($pic as $pic1) {	
+		                    if ($pic1->owner_id == $owner1->id) {
+                               
+								//$pic_name = $pic1->pic_name;
+                                //File::delete('assets/'.$pic_name);	
+								File::delete('assets/'.$pic1->pic_name);
+								
+								 $pic1->delete();
+                            }  // end ... if ($pic1->owner_id == $owner1->id)
+                        } // end ... foreach ($pic as $pic1)
+                    }  // end ... if ($pic->isEmpty() != TRUE)					
+					
+			        // Once all of the associated pictures have been deleted,
+					//   Deleted the owner
+					$owner1->delete();
+					
+		        }   // end ... if ($owner1->pic_owner_name == $owner_name)
+		    }   // end ... if ($found_Owner == false)
+		}   // end ... foreach ($owner as $owner1)
+	}   // end ... if ($owner->isEmpty() != TRUE) 
+	
+	
+	return View::make('gen_delete_owner')
+		       ->with('owner_name', $owner_name)
+			   ->with('found_Owner', $found_Owner);
+
+});
+
+
 Route::get('/get-environment',function() {
 
     echo "Environment: ".App::environment();

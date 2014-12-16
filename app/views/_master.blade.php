@@ -54,6 +54,10 @@
 			<a href='/delete_pic'>Delete a Picture</a>	
 			<br>
 			<br>			
+			
+			<a href='/delete_owner'>Delete an Owner</a>	
+			<br>
+			<br>						
 	 	
 </body>
 </html>
