@@ -16,8 +16,7 @@
     @endforeach
     </ul>  
 
-<!-- Create the form to obtain the number of paragraphs, and to generate the Lorem Ipsum 
-      on the lorem_ipsum blade view page  -->
+<!-- Create the form to Add a Picture Owner  -->
 
 		<hl><b>Add a Picture Owner</b><br><br></hl> 
 		
@@ -26,14 +25,8 @@
 		{{ Form::label('owner','Enter the Owner (Max 20 characters) ') }} 
 	
 		{{ Form::text('owner'); }} 
-
-<!--        {{ Form::label('image', 'Image') }}
-  		
-		{{ Form::file('image') }}  -->
 		
 		{{ Form::submit('Save') }}
-
-<!--	    {{ Form::submit('save', array('name' => 'title')) }}  --> 
 
 		{{ Form::close() }}				
 		

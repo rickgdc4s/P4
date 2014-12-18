@@ -18,8 +18,7 @@
     @endforeach
     </ul> 
 	
-<!-- Create the form to obtain the number of users, and whether to also generate birthday and 
-      profile dummy text on the random_user blade view page  -->	
+<!-- Create the form to Delete a Picture  -->	
 		
 	{{ Form::open(array('url' => '/delete_pic', 'method' => 'POST')) }}
 
@@ -30,16 +29,6 @@
 		{{ Form::submit('delete'); }}
 		
 		<br>
-		
-<!--		{{ Form::label('birthday', 'Birthday') }}
-			
-		{{ Form::checkbox('birthday', 'Birthday') }}	
-
-		<br>
-		
-		{{ Form::label('profile', 'Profile') }}
-			
-		{{ Form::checkbox('profile', 'Profile') }}			 -->
 
 	{{ Form::close() }}
 	

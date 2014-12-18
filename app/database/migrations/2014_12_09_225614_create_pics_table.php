@@ -28,13 +28,11 @@ class CreatePicsTable extends Migration {
 				   
 				   $table->string('owner_name');
 				   
-                   //$table->binary('image');
 				   $table->string('image');
                    $table->date('pic_date');
 		   
                    # Define foreign keys...
                    $table->foreign('owner_id')->references('id')->on('owners');
-				   //$table->foreign('owner_id')->references('pic_owner_id')->on('owners');
 		   
            });				
 	}

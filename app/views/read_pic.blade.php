@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<hl><b>Retrieve a Picture</b><br><br></hl> 
+	<hl><b>Retrieve a Picture and display it</b><br><br></hl> 
 	
 <!-- Display error messages if any errors found during validation  	-->
 	
@@ -18,8 +18,7 @@
     @endforeach
     </ul> 
 	
-<!-- Create the form to obtain the number of users, and whether to also generate birthday and 
-      profile dummy text on the random_user blade view page  -->	
+<!-- Create the form to Retrieve a Picture  -->	
 		
 	{{ Form::open(array('url' => '/read_pic', 'method' => 'POST')) }}
 
@@ -30,16 +29,6 @@
 		{{ Form::submit('retrieve'); }}
 		
 		<br>
-		
-<!--		{{ Form::label('birthday', 'Birthday') }}
-			
-		{{ Form::checkbox('birthday', 'Birthday') }}	
-
-		<br>
-		
-		{{ Form::label('profile', 'Profile') }}
-			
-		{{ Form::checkbox('profile', 'Profile') }}			 -->
 
 	{{ Form::close() }}
 	

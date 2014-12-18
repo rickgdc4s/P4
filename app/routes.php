@@ -32,7 +32,6 @@ Route::post('/add_owner', function()
 	
 	// Get the name of the owner
     $query = Input::get('owner');
-	echo "Owner input = " . $query . ".<br>";
 	
 		// Create the validation constraint set
 	$rules = array();
@@ -61,10 +60,8 @@ Route::post('/add_owner', function()
 	
 	// Check if the Owner name entered exists in the Owner table of the Picture DB
     if ($owner->isEmpty() != TRUE) {
-        echo "In if" ."<br>";
         foreach ($owner as $owner1) {	
 		   if ($owner1->pic_owner_name == $query) {
-		      echo "Owner Found - Owner already exists"."<br>";
 		      $found_Owner = true;
 			  break;
 			}   // end ... if ($owner1->pic_owner_name == $query)
@@ -136,10 +133,9 @@ Route::post('/add_pic', function()
 	
 	// Check if the Picture entered already exists in the Picture table of the Picture DB
     if ($pic_exists->isEmpty() != TRUE) {
-        echo "In if" ."<br>";
+
         foreach ($pic_exists as $pic_exists1) {	
 		   if ($pic_exists1->pic_name == $pic_name) {
-		      echo "Pic Found - Picture already exists"."<br>";
 		      $found_Pic = true;
 			  break;
 			  }   // end ... if ($pic_exists1->pic_name == $pic_name)
@@ -151,9 +147,6 @@ Route::post('/add_pic', function()
 	// If the picture does already exist in the Picture table, even if it
 	//   exists as a picture of another owner, it will not be entered again 
     if ($found_Pic == false) {
-	    echo $pic_name."<br>";
-	    echo $pic_owner."<br>";
-	    echo $pic_date."<br>";
 
         $pic = new Pic;
         $pic->pic_name = $pic_name;
@@ -163,18 +156,8 @@ Route::post('/add_pic', function()
 	    // Get the corresponding Owner entry in the Owner table in the Picture DB
         $owner = Owner::where('pic_owner_name', '=', $pic_owner)->get();
 
-        echo "Owner = " . $owner . ".<br>";
-
         $owner1 = new Owner;
         $owner1 = $owner;
-
-        echo "Owner1 = " . $owner1 . ".<br>";
-
-//echo "Pic filename = " . $pic_name . ".<br>";  
-//$pic_real_image->move('assets/', $pic_name);
-			  		  
-//$pic->owner()->associate($owner1);
-//$pic->save();
 
 	    // Check if the Owner name entered exists in the Owner table of the Picture DB
 	    //  If the Owner name entered does not exist in the Owner table of the Picture DB,
@@ -183,15 +166,12 @@ Route::post('/add_pic', function()
 		//   Add the picture name to the Picture table of the Picture DB
 		//    and move the image to the storage location on the web server
         if ($owner->isEmpty() != TRUE) {
-            echo "In if" ."<br>";
 	        $count = 0;
 	 
             foreach ($owner as $owner1) {
-	            echo "Owner = " . $owner1->pic_owner_name . ".<br>";
 		
 	            if ($found_Owner == false) {
 	                if ($owner1->pic_owner_name == $pic_owner) {
-		                echo "Owner Found"."<br>";
 			            $found_Owner = true;
 			  			  
 			            $pic_real_image->move('assets/', $pic_name);
@@ -222,7 +202,6 @@ Route::post('/read_pic', function()
 {
     // Obtain the entered name of the picture
 	$pic_name = Input::get('query');
-	echo $pic_name."<br>";
 	
 	// Create the validation constraint set
 	$rules = array();
@@ -257,15 +236,12 @@ Route::post('/read_pic', function()
 
 	// Check if the Picture entered for retrieval exists in the Picture table of the Picture DB
     if ($pic->isEmpty() != TRUE) {
-        echo "In if" ."<br>";
 		
         foreach ($pic as $pic1) {
-	        echo "Pic = " . $pic1->pic_name . ".<br>";
 			
 	       if ($found_Pic == false) {
 		   
 	            if ($pic1->pic_name == $pic_name) {
-		            echo "Pic Found"."<br>";
 					
 			        $found_Pic = true;
 			  	    $pic_owner = $pic1->owner_name;
@@ -296,33 +272,60 @@ Route::post('/retrieve_pic', function()
 {
     // Obtain the entered name of the picture
 	$pic_name = Input::get('query');
-	echo $pic_name."<br>";
 	
-    //$file = 'path_to_my_file.pdf';
-	//$file = public_path(). 'http://localhost/public/assets/$pic_name";
-	//$file = public_path(). 'http://localhost/assets/'.$pic_name;
 	$file = public_path(). "/" .$pic_name;
     return Response::download($file);
 
 });
 
-////Route::post('/file/download', function()
-////{
-
-	// Update a previously entered picture in the Picture table in the Picture Database	
-	////return 'In route-get update_pic';
-	//return View::make('update_pic');
-	
-////});
 
 Route::get('/update_pic', function()
 {
 
 	// Update a previously entered picture in the Picture table in the Picture Database	
-	return 'In route-get update_pic';
-	//return View::make('update_pic');
+	//return 'In route-get update_pic';
+	return View::make('update_pic');
 	
 });
+
+Route::post('/update_pic', function()
+{
+    $pic_name = Input::get('query');
+	$updated_pic_date = Input::get('date');	
+	
+	// Get the Picture entry in the Picture table in the Picture DB
+    $pic = Pic::where('pic_name', '=', $pic_name)->get();
+   	
+	// Initialize the boolean to false
+	//  The entered Picture name may not exist in the Picture table of the Picture DB
+    $found_Pic = false;
+
+	// Check if the Picture entered for deletion exists in the Picture table of the Picture DB
+	//  If it does, delete it from the Picture table of the Picture DB
+	//   and from the storage directory on the web server
+    if ($pic->isEmpty() != TRUE) {
+		
+        foreach ($pic as $pic1) {
+			
+	       if ($found_Pic == false) {
+	            if ($pic1->pic_name == $pic_name) {
+					
+			        $found_Pic = true;
+					$pic1->pic_date = $updated_pic_date;
+					$pic1->save();
+
+		        }   // end ... if ($pic1->pic_name == $pic_name)
+		    }   // end ... if ($found_Pic == false)
+		}   // end ... foreach ($pic as $pic1)
+	}   // end ... if ($pic->isEmpty() != TRUE) 
+	
+	return View::make('gen_update_pic')
+		       ->with('pic_name', $pic_name)
+		       ->with('updated_pic_date', $updated_pic_date)			   
+			   ->with('found_Pic', $found_Pic);
+
+});	
+
 
 Route::get('/delete_pic', function()
 {
@@ -335,7 +338,6 @@ Route::post('/delete_pic', function()
 {
     // Obtain the Entered name of the picture
 	$pic_name = Input::get('query');
-	echo $pic_name."<br>";
 	
 		// Create the validation constraint set
 	$rules = array();
@@ -359,8 +361,6 @@ Route::post('/delete_pic', function()
 	// Get the Picture entry in the Picture table in the Picture DB
     $pic = Pic::where('pic_name', '=', $pic_name)->get();
    
-    echo "Picture = " . $pic . ".<br>";
-
 	// Initialize the boolean to false
 	//  The entered Picture name may not exist in the Picture table of the Picture DB
     $found_Pic = false;
@@ -369,14 +369,11 @@ Route::post('/delete_pic', function()
 	//  If it does, delete it from the Picture table of the Picture DB
 	//   and from the storage directory on the web server
     if ($pic->isEmpty() != TRUE) {
-        echo "In if" ."<br>";
 		
         foreach ($pic as $pic1) {
-	        echo "Pic = " . $pic1->pic_name . ".<br>";
 			
 	       if ($found_Pic == false) {
 	            if ($pic1->pic_name == $pic_name) {
-			        echo "Pic Found"."<br>";
 					
 			        $found_Pic = true;
 			        $pic1->delete();
@@ -405,7 +402,6 @@ Route::post('/delete_owner', function()
 {
     // Obtain the Entered name of the picture
 	$owner_name = Input::get('query');
-	echo $owner_name."<br>";
 	
 		// Create the validation constraint set
 	$rules = array();
@@ -432,8 +428,6 @@ Route::post('/delete_owner', function()
 	// Get all of the Picture entries in the Picture table in the Picture DB
 	$pic = Pic::all();	
    
-	echo "Owner = " . $owner . ".<br>";
-
 	// Initialize the boolean to false
 	//  The entered Owner name may not exist in the Owner table of the Picture DB
     $found_Owner = false;
@@ -443,26 +437,20 @@ Route::post('/delete_owner', function()
 	//  If it does, delete it from the Owner table of the Picture DB
 	//   and from the storage directory on the web server
     if ($owner->isEmpty() != TRUE) {
-        echo "In if" ."<br>";
 		
         foreach ($owner as $owner1) {
-	        echo "Owner = " . $owner1->pic_owner_name . ".<br>";
 			
 	       if ($found_Owner == false) {
 	            if ($owner1->pic_owner_name == $owner_name) {
-			        echo "Owner Found"."<br>";
 					
 			        $found_Owner = true;
 					
 	                // Check if there are any associated Pictures with this Owner
 		            //  If so, delete each associeate Picture from the Picture table of the Picture DB
                     if ($pic->isEmpty() != TRUE) {
-                        echo "In if" ."<br>";
                         foreach ($pic as $pic1) {	
 		                    if ($pic1->owner_id == $owner1->id) {
                                
-								//$pic_name = $pic1->pic_name;
-                                //File::delete('assets/'.$pic_name);	
 								File::delete('assets/'.$pic1->pic_name);
 								
 								 $pic1->delete();
@@ -513,7 +501,7 @@ Route::get('mysql-test', function() {
 
 });
 
-# /app/routes.php
+
 Route::get('/debug', function() {
 
     echo '<pre>';

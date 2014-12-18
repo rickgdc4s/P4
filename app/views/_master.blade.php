@@ -22,39 +22,42 @@
 	<p>Each uniquely named picture is stored in the web server storage directory, and identified by its name in the <br>
 	picture table of the database. Only one copy of any unique picture may exist in the database (a picture belonging <br>
 	to one owner may not also belong to another owner). </p>
-	<p>There are six operations that can be performed with this database. A user may enter his/hers Owner Name (which <br>
+	<p>There are seven operations that can be performed with this database. A user may enter his/hers Owner Name (which <br>
 	must be the initial step to use the database). Once the user has created an Owner Name in the Owner table of the <br>
 	database, the user can Add a Picture, View an existing Picture in the database, Update a Picture's properties, <br>
 	Delete a Picture from the database, and Delete his/hers Owner Name.</p>
 				 
-<!-- Provide a link to the Lorem Ipsum Generator page, to be routed through the lorem_ipsum route -->			  			 
+<!-- Provide a link to the Add a Picture Owner page -->			  			 
 			<a href='/add_owner'>Add a Picture Owner</a>
 			<br>					 
 			<br>
 			
-<!-- Provide a link to the Lorem Ipsum Generator page, to be routed through the lorem_ipsum route -->			  			 
+<!-- Provide a link to the Add a Picture page -->			  			 
 			<a href='/add_pic'>Add a Picture</a>
 			<br>
 			<br>			
 			 
-<!-- Provide a link to the Generate Random Users page, to be routed through the random user route -->			  
+<!-- Provide a link to the View a Picture page -->			  
 			<a href='/read_pic'>View a Picture</a>	
 			<br>	
 			<br>			
 			
-<!-- Provide a link to the Generate Random Users page, to be routed through the random user route -->			  
+<!-- Provide a link to the Download a Picture page -->			  
 			<a href='/retrieve_pic'>Download a Picture</a>	
 			<br>	
 			<br>						
-			
+
+<!-- Provide a link to the Update a Picture page -->			  			
 			<a href='/update_pic'>Update a Picture</a>	
 			<br>	
 			<br>			
-			
+
+<!-- Provide a link to the Delete a Picture page -->			  			
 			<a href='/delete_pic'>Delete a Picture</a>	
 			<br>
 			<br>			
-			
+
+<!-- Provide a link to the Download an Owner page -->			  			
 			<a href='/delete_owner'>Delete an Owner</a>	
 			<br>
 			<br>						

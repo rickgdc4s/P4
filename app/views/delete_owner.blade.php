@@ -2,13 +2,13 @@
 <html>
 <head>
 
-	<title>Delete a Picture</title>
+	<title>Delete an Owner</title>
 	<meta charset='utf-8'>
 	
 </head>
 <body>
 
-	<hl><b>Delete a Picture</b><br><br></hl> 
+	<hl><b>Delete an Owner</b><br><br></hl> 
 	
 <!-- Display error messages if any errors found during validation  	-->
 	
@@ -18,8 +18,7 @@
     @endforeach
     </ul> 
 	
-<!-- Create the form to obtain the number of users, and whether to also generate birthday and 
-      profile dummy text on the random_user blade view page  -->	
+<!-- Create the form to Delete an Owner  -->	
 		
 	{{ Form::open(array('url' => '/delete_owner', 'method' => 'POST')) }}
 
@@ -30,16 +29,6 @@
 		{{ Form::submit('delete'); }}
 		
 		<br>
-		
-<!--		{{ Form::label('birthday', 'Birthday') }}
-			
-		{{ Form::checkbox('birthday', 'Birthday') }}	
-
-		<br>
-		
-		{{ Form::label('profile', 'Profile') }}
-			
-		{{ Form::checkbox('profile', 'Profile') }}			 -->
 
 	{{ Form::close() }}
 	

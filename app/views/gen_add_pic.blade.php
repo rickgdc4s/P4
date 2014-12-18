@@ -8,7 +8,7 @@
 </head>
 <body>
 	
-<!-- Provide a link to return to the home page after generating the Lorem Ipsum -->		
+<!-- Provide a link to return to the home page -->		
 	<li><a href='/'>Return to Home Page</a></li>
 	
 	<br>
@@ -33,10 +33,6 @@
 	{{ HTML::link('http://localhost/assets/'.$pic_name) }}
 	
 	{{ HTML::image('assets/'.$pic_name) }}
-	
-<!--	{{ HTML::image('MountE.jpg'); }}
-	
- <h4><a href="localhost://QED.testpics"><img src="$name"</a></h4> -->
 	
 	<br>
 	

@@ -8,7 +8,7 @@
 </head>
 <body>
 	
-<!-- Provide a link to return to the home page after generating the Lorem Ipsum -->		
+<!-- Provide a link to return to the home page  -->		
 	<li><a href='/'>Return to Home Page</a></li>
 	
 	<br>

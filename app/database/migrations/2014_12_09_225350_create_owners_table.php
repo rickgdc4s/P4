@@ -21,14 +21,10 @@ class CreateOwnersTable extends Migration {
 			
             # created_at, updated_at columns
             $table->timestamps();
-			
-			//$table->integer('pic_owner_id');
-			
+						
             # General data...
             $table->string('pic_owner_name');
-			
-            //$table->date('birth_date');
-			
+						
             # Define foreign keys...
             # none needed
 
